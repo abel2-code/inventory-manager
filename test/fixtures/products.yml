@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_type: MyString
+  brand: MyString
+  serial: 1
+  purchase_cost: 1
+  available?: false
+  rentable?: false
+  rate_for_rental: 1
+  gc_branch_id: 1
+
+two:
+  product_type: MyString
+  brand: MyString
+  serial: 1
+  purchase_cost: 1
+  available?: false
+  rentable?: false
+  rate_for_rental: 1
+  gc_branch_id: 1

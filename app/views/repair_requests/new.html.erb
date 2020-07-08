@@ -1,0 +1,20 @@
+<h1>Create a New Repair Request</h1>
+
+<%= form_for @repair_request do |f| %>
+<%= f.label :product_id, "Select a Product" %><br>
+<%= f.collection_select :product_id, Product.all.order(:brand), :id, :combined_info, prompt: true %><br>
+<br>
+<%= f.label :repair_shop_id, "Select a Repair Shop" %><br>
+<%= f.collection_select :repair_shop_id, RepairShop.all, :id, :name, prompt: true %><br>
+<br>
+<%= f.submit "Submit Request"%>
+<% end %>
+
+
+<% if @repair_request.errors.any? %>
+    <ul>
+        <% @repair_request.errors.full_messages.each do |message| %>
+            <li> <%= message %> </li>
+        <% end %>
+    <ul><br><br>
+<% end %>

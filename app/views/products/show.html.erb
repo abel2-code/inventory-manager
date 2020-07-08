@@ -1,0 +1,13 @@
+<h1><%= @product.brand %> <%= @product.product_type %></h1>
+<h2>Belongs to: <%= link_to "#{@product.gc_branch.city}", gc_branch_path(@product.gc_branch) %></h2>
+<h3>Product Info: </h3>
+<ul>
+    <li>Serial: <%= @product.serial %></li>
+    <li>Price: $<%= @product.purchase_cost %></li>
+    <li>Availability: <%= @product.available? ? "Is Available" : "Not Available" %></li>
+    <li>Rentability: <%= @product.rentable? ? "Is Rentable" : "Not Rentable" %></li>
+    <% if @product.rentable? %>
+        <li>Rental Rate: $<%= @product.rate_for_rental %></li>
+    <% end %>
+</ul>
+

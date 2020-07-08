@@ -1,0 +1,37 @@
+<h1>Guitar Center - <%= @gc_branch.city %>, branch # <%= @gc_branch.id %></h1>
+
+<p>Current Company Balance: $<%= @gc_branch.company_bank_acct %></p>
+
+<h3>Current Inventory: </h3>
+
+<ul>
+    <% @gc_branch.products.order(:product_type).each do |product| %>
+        <li>
+            <%= product.product_type %> - <%= product.brand %> - <%= product.serial %>
+        </li>
+    <% end %>
+</ul>
+
+<h3>All Product Exchanges: </h3>
+
+<ul>
+    <% @gc_branch.product_exchanges.order(:exchange_type).each do |pe| %>
+        <li>
+            <%= pe.exchange_type %> - <%= pe.product.product_type %> - <%= pe.musician.name %>
+        </li>
+    <% end %>
+</ul>
+
+<h3>All Repair Requests: </h3>
+
+<% if !@gc_branch.repair_requests.any? %>
+    <p>No Requests Filled</p>
+<% end %>
+
+<ul>
+    <% @gc_branch.repair_requests.order(:created_at).each do |rr| %>
+        <li>
+            <%= rr.product.product_type %> - <%= rr.repair_shop.name %> ( <%= rr.created_at %> )
+        </li>
+    <% end %>
+</ul>

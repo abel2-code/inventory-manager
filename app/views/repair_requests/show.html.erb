@@ -1,0 +1,6 @@
+<h1>Repair Request for <%= @repair_request.product.combined_info %></h1>
+
+<li>Cost: <%= rr.cost == nil ? "TBD" : "#{rr.cost}" %></li>
+<li>Being Repaired At: <%= rr.repair_shop.name %></li>
+<li>Submitted At: <%= rr.created_at %></li>
+<li>Expected Return: <%= rr.date_of_return == nil ? "TBD" : "#{rr.date_of_return}" %></li>

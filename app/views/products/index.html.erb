@@ -1,0 +1,10 @@
+<h1>All Products</h1>
+
+<% @gc_branches.order(:city).each do |b| %>
+    <h3><%= link_to "#{b.city}, branch # #{b.id}", gc_branch_path(b) %></h3>
+    <ul>
+        <% b.products.order(:product_type).each do |pr| %>
+            <li><%= link_to "#{pr.product_type} #{pr.brand} - #{pr.serial}", product_path(pr) %></li>
+        <% end %>
+    </ul>
+<% end %>

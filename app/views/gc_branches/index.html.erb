@@ -1,0 +1,9 @@
+<h1>All Guitar Center Branches</h1>
+
+<ul>
+<% @gc_branches.order(:city).each do |gc| %>
+    <li>
+        <%= link_to "#{gc.city} (branch # #{gc.id})", gc_branch_path(gc) %>
+    </li>
+<% end %>
+<ul>

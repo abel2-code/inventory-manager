@@ -1,0 +1,11 @@
+<h1>All Repair Requests</h1>
+
+<% @repair_requests.order(:created_at).each do |rr| %>
+    <h4><%= link_to "#{rr.product.brand} #{rr.product.product_type}", repair_request_path(rr) %></h4>
+    <ul>
+        <li>Cost: <%= rr.cost == nil ? "TBD" : "#{rr.cost}" %></li>
+        <li>Being Repaired At: <%= rr.repair_shop.name %></li>
+        <li>Submitted At: <%= rr.created_at %></li>
+        <li>Expected Return: <%= rr.date_of_return == nil ? "TBD" : "#{rr.date_of_return}" %></li>
+    </ul>
+<% end %>
