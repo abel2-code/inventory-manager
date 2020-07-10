@@ -2,10 +2,13 @@
 
 <p>Current Company Balance: $<%= @gc_branch.company_bank_acct %></p>
 
+<%= button_to "Sell/Rent a Product", new_product_exchange_path, method: :get %>
+<%= button_to "Create Repair Request", new_repair_request_path, method: :get %>
+
 <h3>Current Inventory: </h3>
 
 <ul>
-    <% @gc_branch.products.order(:product_type).each do |product| %>
+    <% @gc_branch.products.where(available?: true).order(:product_type).each do |product| %>
         <li>
             <%= product.product_type %> - <%= product.brand %> - <%= product.serial %>
         </li>
@@ -17,7 +20,10 @@
 <ul>
     <% @gc_branch.product_exchanges.order(:exchange_type).each do |pe| %>
         <li>
-            <%= pe.exchange_type %> - <%= pe.product.product_type %> - <%= pe.musician.name %>
+            <%= pe.exchange_type %> - <%= pe.product.product_type %> - <%= pe.musician.name %> 
+            <% if (pe.created_at + 2.weeks).future? %>
+                <%= button_to "Refund", edit_product_exchange_path(pe), method: :get %> 
+            <% end %>
         </li>
     <% end %>
 </ul>
@@ -31,7 +37,7 @@
 <ul>
     <% @gc_branch.repair_requests.order(:created_at).each do |rr| %>
         <li>
-            <%= rr.product.product_type %> - <%= rr.repair_shop.name %> ( <%= rr.created_at %> )
+            <%= rr.product.product_type %> - <%= rr.repair_shop.name %> ( <%= rr.created_at.to_s[0,10] %> )
         </li>
     <% end %>
 </ul>

@@ -17,3 +17,7 @@
  .errors {
     display: inline;
  }
+
+ .error-messages {
+   color: red;
+ }

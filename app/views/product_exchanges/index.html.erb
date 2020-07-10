@@ -1,0 +1,11 @@
+<h1>All Product Exchanges</h1>
+
+<% @product_exchanges.order(:created_at).each do |pe| %>
+    <h4><%= link_to "#{pe.product.brand} #{pe.product.product_type}", product_path(pe.product) %></h4>
+    <ul>
+        <li>Cost: $<%= pe.product.purchase_cost %></li>
+        <li>Sold to: <%= pe.musician.name %></li>
+        <li>Sold on: <%= pe.created_at.to_s[0,10] %></li>
+        <li>Sold from: <%= link_to "#{pe.product.gc_branch.city}", gc_branch_path(pe.product.gc_branch) %></li>
+    </ul>
+<% end %>

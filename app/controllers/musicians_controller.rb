@@ -14,7 +14,15 @@ class MusiciansController < ApplicationController
     end
 
     def create
+        @musician = Musician.new(musician_params)
         
+        if @musician.valid?
+            @musician.save
+            redirect_to new_product_exchange_path
+        else
+            render "new"
+        end
+
     end
 
     def edit
@@ -30,7 +38,7 @@ class MusiciansController < ApplicationController
 
     def musician_params
         params.require(:musician).permit(
-            :name, :bank_account, :is_a_student?
+            :name, :is_a_student?, :bank_account
         )
     end
 

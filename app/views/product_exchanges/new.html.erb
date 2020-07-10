@@ -1,0 +1,53 @@
+<br>
+<%= button_to "New Customer", new_musician_path, method: :get %>
+
+<h1>Generate a Purchase: </h1>
+
+<%= form_for @product_exchange do |f| %>
+<%= f.label :musician_id %>
+<%= f.collection_select :musician_id, Musician.all.order(:id).reverse, :id, :name %>
+<br>
+<br>
+<%= f.label :product_id %>
+<%= f.collection_select :product_id, Product.all.order(:product_type), :id, :exchange_info, prompt: true %>
+<br>
+<br>
+<%= f.hidden_field :exchange_type, :value => "Purchase" %>
+<%= f.hidden_field :total_number_scheduled, :value => 1 %>
+<%= f.hidden_field :refundable?, :value => true %>
+<%= f.submit "Submit Purchase" %>
+<% end %>
+
+<h1>Generate a Rental: </h1>
+
+<%= form_for @product_exchange do |f| %>
+<%= f.label :musician_id %>
+<%= f.collection_select :musician_id, Musician.all.order(:id).reverse, :id, :name %>
+<br>
+<br>
+<%= f.label :product_id %>
+<%= f.collection_select :product_id, Product.where(rentable?: true), :id, :exchange_info, prompt: true %>
+<br>
+<br>
+<%= f.label :rental %>
+<%= f.radio_button :exchange_type, "Rental" %>
+<%= f.label :lessons %>
+<%= f.radio_button :exchange_type, "Lessons" %>
+<br>
+<br>
+<%= f.label :total_number_scheduled %>
+<%= number_field(:product_exchange, :total_number_scheduled, in: 1..20) %>
+<br>
+<br>
+<%= f.hidden_field :refundable?, :value => false %>
+<%= f.submit "Submit Rental" %>
+<% end %>
+
+<% if @product_exchange.errors.any? %>
+    <%= javascript_tag "alert('Could Not Process Request')" %>
+    <ul>
+        <% @product_exchange.errors.full_messages.each do |message| %>
+            <li class="error-messages"> <%= message %> </li>
+        <% end %>
+    <ul><br><br>
+<% end %>

@@ -14,7 +14,19 @@ class ProductExchangesController < ApplicationController
     end
 
     def create
-        
+        @product_exchange = ProductExchange.new(product_exchange_params)
+
+        if @product_exchange.valid? && @product_exchange.check_for_adequate_funds
+            @product_exchange.process_product_exchange
+            @product_exchange.save
+
+            redirect_to @product_exchange
+        else
+            if !@product_exchange.check_for_adequate_funds
+                @product_exchange.errors.messages[:inadequate_funds] << ""
+            end
+            render "new"
+        end
     end
 
     def edit
@@ -24,6 +36,10 @@ class ProductExchangesController < ApplicationController
     end
 
     def destroy
+        @product_exchange.refund
+        @product_exchange.save
+        @product_exchange.destroy
+        redirect_to gc_branches_path
     end
 
     private

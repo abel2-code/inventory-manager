@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_06_210225) do
+ActiveRecord::Schema.define(version: 2020_07_09_215614) do
 
   create_table "gc_branches", force: :cascade do |t|
     t.string "city"
     t.integer "company_bank_acct"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.integer "gc_branch_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gc_branch_id"], name: "index_managers_on_gc_branch_id"
   end
 
   create_table "musicians", force: :cascade do |t|
@@ -35,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_07_06_210225) do
     t.integer "total_number_scheduled"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "date_of_exchange"
     t.index ["musician_id"], name: "index_product_exchanges_on_musician_id"
     t.index ["product_id"], name: "index_product_exchanges_on_product_id"
   end
@@ -71,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_07_06_210225) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "managers", "gc_branches"
   add_foreign_key "product_exchanges", "musicians"
   add_foreign_key "product_exchanges", "products"
   add_foreign_key "repair_requests", "products"

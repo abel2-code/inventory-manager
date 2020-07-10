@@ -1,0 +1,21 @@
+<h2> Create Account</h2>
+<%=form_for @manager, :url => "/managers" do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+  <%= f.label :guitar_center_branch %>
+  <%= f.collection_select :gc_branch_id, GcBranch.all, :id, :collection_select_view, prompt: true %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
+<%= f.submit "Sign Up" %>
+<%end%>
+
+<% if @manager.errors.any? %>
+    <%= javascript_tag "alert('Error Registering New Manager')" %>
+    <ul>
+        <% @manager.errors.full_messages.each do |message| %>
+            <li class="error-messages"> <%= message %> </li>
+        <% end %>
+    <ul>
+<% end %>

@@ -1,0 +1,20 @@
+<h1>Create an account</h1>
+
+<%= form_for @musician do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+<br>
+<br>
+<%= f.label :i_am_a_student %>
+<%= f.radio_button :is_a_student?, checked: true, value: true %>
+<%= f.label :i_am_not_a_student %>
+<%= f.radio_button :is_a_student?, value: true %>
+<br>
+<br>
+<%= f.label :bank_account %>
+<%= f.number_field :bank_account, min: 0, step: 100 %>
+<br>
+<br>
+<%= f.submit %>
+
+<% end %>

@@ -15,4 +15,9 @@ class Product < ApplicationRecord
     def combined_info
         "#{self.brand} #{self.product_type} - #{self.serial}"
     end
+
+    def exchange_info
+        "#{self.brand} #{self.product_type} - $#{self.purchase_cost}"
+    end
+
 end

@@ -64,6 +64,8 @@ end
     pe.musician = Musician.all.sample
     pe.product = Product.all.sample
     pe.exchange_type = ["Rental", "Purchase", "Lessons"].sample
+    pe.product.update(available?: false)
+    pe.date_of_exchange = Faker::Date.between(from: '2020-06-15', to: '2020-07-10')
 
     pe.save
 end

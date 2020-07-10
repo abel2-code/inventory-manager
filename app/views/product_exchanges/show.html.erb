@@ -1,0 +1,8 @@
+<h1><%= @product_exchange.product.combined_info %> Purchased!</h1>
+<p>Customer: <%= @product_exchange.musician.name %> - current balance: $<%= @product_exchange.musician.bank_account %></p>
+<p>Seller: Guitar Center <%= link_to "#{@product_exchange.product.gc_branch.city}", gc_branch_path(@product_exchange.product.gc_branch) %></p>
+<p>Exchange Type: <%= @product_exchange.exchange_type %></p>
+<p>Cost Per Item: $<%= @product_exchange.product.purchase_cost %></p>
+<p>Actual Cost: $<%= @product_exchange.calculate_total_bill.round(2) %></p>
+<p>Date: <%= @product_exchange.created_at.to_s[0,10] %></p>
+<p>Refundable Until: <%= (@product_exchange.created_at + 2.weeks).to_s[0,10] %></p>

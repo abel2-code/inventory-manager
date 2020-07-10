@@ -1,0 +1,11 @@
+<h1>Are you sure?</h1>
+
+<%= form_for @product_exchange do |f| %>
+<%= f.hidden_field :musician_id, :value => @product_exchange.musician_id %>
+<%= f.hidden_field :product_id, :value => @product_exchange.product_id %>
+<%= f.hidden_field :exchange_type, :value => "Returned" %>
+<%= f.hidden_field :total_number_scheduled, :value => 1 %>
+<%= f.hidden_field :refundable?, :value => @product_exchange.refundable? %>
+<%= f.submit "Yes" %>
+<% end %>
+<%= button_to "No", gc_branch_path(@product_exchange.product.gc_branch), method: :get %>
